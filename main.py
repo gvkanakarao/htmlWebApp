@@ -1,10 +1,11 @@
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import yfinance as yf
 
 app = FastAPI()
 
-# Allow frontend to communicate with backend locally
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,11 +14,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Request model for incoming MPIN check
+class MPINRequest(BaseModel):
+    mpin: str
+
+@app.post("/verify-mpin")
+def verify_mpin(data: MPINRequest):
+    # Fetch MPIN from Render environment variables (default to "1234" for local testing if not set)
+    correct_mpin = os.getenv("APP_MPIN", "1234")
+    
+    if data.mpin == correct_mpin:
+        return {"success": True, "message": "Access granted"}
+    else:
+        raise HTTPException(status_code=401, detail="Invalid MPIN")
+
 @app.get("/get-price")
 def get_stock_price(ticker: str):
     try:
         stock = yf.Ticker(ticker)
-        # Fetch current price using history or fast_info
         todays_data = stock.history(period="1d")
         
         if todays_data.empty:
