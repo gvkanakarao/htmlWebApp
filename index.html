@@ -36,7 +36,8 @@
 
             try {
                 // Call your FastAPI backend endpoint
-                const response = await fetch(`http://127.0.0.1:8000/get-price?ticker=${ticker}`);
+               // const response = await fetch(`http://127.0.0.1:8000/get-price?ticker=${ticker}`);
+                const response = await fetch(`https://stock-tracker-api-7snp.onrender.com/get-price?ticker=${ticker}`);
                 
                 if (!response.ok) {
                     throw new Error("Failed to fetch");
