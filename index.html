@@ -3,27 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Price Fetcher Prototype</title>
-    <style>
-        body { font-family: sans-serif; background: #121212; color: #fff; padding: 40px; }
-        .container { background: #1e1e1e; padding: 20px; border-radius: 8px; max-width: 400px; }
-        input, button { padding: 10px; margin-top: 10px; font-size: 1rem; }
-        input { background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 4px; width: 70%; }
-        button { background: #0d6efd; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #0b5ed7; }
-        #result { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: #4ade80; }
-    </style>
+    <title>Secure Stock App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Stock Price Checker</h2>
-        <input type="text" id="tickerInput" placeholder="e.g. AAPL, TCS.NS">
-        <button onclick="fetchPrice()">Get Price</button>
-        <div id="result"></div>
+    <!-- 1. Login Screen Overlay -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>Enter 4-Digit MPIN</h2>
+            <input type="password" id="mpinInput" maxlength="4" placeholder="••••">
+            <br>
+            <button onclick="verifyMpin()">Login</button>
+        </div>
+    </div>
+
+    <!-- 2. Main Dashboard (Protected) -->
+    <div id="main-app">
+        <div class="container">
+            <h2>Stock Price Checker</h2>
+            <input type="text" id="tickerInput" placeholder="e.g. AAPL, TCS.NS">
+            <button onclick="fetchPrice()">Get Price</button>
+            <div id="result"></div>
+        </div>
     </div>
 
     <script>
+        // REPLACE WITH YOUR LIVE RENDER URL (or keep http://127.0.0.1:8000 for local testing)
+        const BACKEND_URL = "https://your-render-app-name.onrender.com";
+
+        async function verifyMpin() {
+            const mpin = document.getElementById('mpinInput').value.trim();
+
+            if (mpin.length !== 4) {
+                alert("Please enter a 4-digit MPIN.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/verify-mpin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mpin: mpin })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Invalid MPIN");
+                }
+
+                // Hide login screen and show main app layout
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-app').style.display = 'block';
+
+            } catch (error) {
+                alert("Incorrect MPIN. Access denied.");
+                document.getElementById('mpinInput').value = "";
+            }
+        }
+
         async function fetchPrice() {
             const ticker = document.getElementById('tickerInput').value.trim();
             const resultDiv = document.getElementById('result');
@@ -35,9 +72,7 @@
             }
 
             try {
-                // Call your FastAPI backend endpoint
-               // const response = await fetch(`http://127.0.0.1:8000/get-price?ticker=${ticker}`);
-                const response = await fetch(`https://stock-tracker-api-7snp.onrender.com/get-price?ticker=${ticker}`);
+                const response = await fetch(`${BACKEND_URL}/get-price?ticker=${ticker}`);
                 
                 if (!response.ok) {
                     throw new Error("Failed to fetch");
@@ -47,7 +82,7 @@
                 resultDiv.innerText = `${data.ticker} Current Price: ₹${data.price}`;
             
             } catch (error) {
-                alert("Failed to fetch price. Please check the ticker symbol and try again.");
+                alert("Failed to fetch price. Please check the ticker symbol.");
             }
         }
     </script>
