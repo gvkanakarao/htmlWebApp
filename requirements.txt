@@ -2,3 +2,6 @@ fastapi
 uvicorn
 yfinance
 pydantic
+python-dotenv
+libsql-client
+pandas
