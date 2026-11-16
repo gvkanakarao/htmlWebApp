@@ -1,91 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Stock App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Stock & Personal Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 1. Login Screen Overlay -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>Enter 4-Digit MPIN</h2>
-            <input type="password" id="mpinInput" maxlength="4" placeholder="••••">
-            <br>
-            <button onclick="verifyMpin()">Login</button>
-        </div>
-    </div>
+    <!-- Dynamic Header Injection Point -->
+    <div id="header-container"></div>
 
-    <!-- 2. Main Dashboard (Protected) -->
-    <div id="main-app">
-        <div class="container">
-            <h2>Stock Price Checker</h2>
-            <input type="text" id="tickerInput" placeholder="e.g. AAPL, TCS.NS">
-            <button onclick="fetchPrice()">Get Price</button>
-            <div id="result"></div>
-        </div>
-    </div>
-
-    <script>
-        // REPLACE WITH YOUR LIVE RENDER URL (or keep http://127.0.0.1:8000 for local testing)
-        const BACKEND_URL = "https://stock-tracker-api-7snp.onrender.com";
-
-        async function verifyMpin() {
-            const mpin = document.getElementById('mpinInput').value.trim();
-
-            if (mpin.length !== 4) {
-                alert("Please enter a 4-digit MPIN.");
-                return;
-            }
-
-            try {
-                const response = await fetch(`${BACKEND_URL}/verify-mpin`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ mpin: mpin })
-                });
-
-                if (!response.ok) {
-                    throw new Error("Invalid MPIN");
-                }
-
-                // Hide login screen and show main app layout
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-
-            } catch (error) {
-                alert("Incorrect MPIN. Access denied.");
-                document.getElementById('mpinInput').value = "";
-            }
-        }
-
-        async function fetchPrice() {
-            const ticker = document.getElementById('tickerInput').value.trim();
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerText = "";
-
-            if (!ticker) {
-                alert("Please enter a ticker symbol!");
-                return;
-            }
-
-            try {
-                const response = await fetch(`${BACKEND_URL}/get-price?ticker=${ticker}`);
-                
-                if (!response.ok) {
-                    throw new Error("Failed to fetch");
-                }
-
-                const data = await response.json();
-                resultDiv.innerText = `${data.ticker} Current Price: ₹${data.price}`;
+    <!-- Scrollable Active Area -->
+    <main class="scrollable-content">
+        <div class="tile-grid">
+            <!-- Tile 1: Active Link to Dairy -->
+            <a href="dairy.html" class="tile">Dairy & Records</a>
             
-            } catch (error) {
-                alert("Failed to fetch price. Please check the ticker symbol.");
-            }
-        }
-    </script>
+            <!-- Tiles 2-6: Placeholder inactive tiles -->
+            <div class="tile disabled">Tile 2</div>
+            <div class="tile disabled">Tile 3</div>
+            <div class="tile disabled">Tile 4</div>
+            <div class="tile disabled">Tile 5</div>
+            <div class="tile disabled">Tile 6</div>
+        </div>
+    </main>
 
+    <script src="script.js"></script>
 </body>
 </html>
