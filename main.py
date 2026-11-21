@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
-from matplotlib import ticker
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
