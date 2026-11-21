@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KK/Deep</title>
+    <link rel="stylesheet" href="deep.css" />
+    <link rel="stylesheet" href="header.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <a id="home" href="index.html" class="home-btn">🏠</a>
+      <a href="#top" class="home-btn" style="margin-left: auto">🔝</a>
+    </header>
+    <main class="scrollable-content">
+      <div class="dashboard-container">
+        <!-- 1. Stock Selection Bar -->
+        <input 
+      type="text" 
+      id="stockSelect" 
+      list="stockOptions" 
+      class="dark-select" 
+      placeholder="-- Select or Type Stock --"
+      autocomplete="off"
+    />
+    
+    <!-- Options will be populated here via JS -->
+    <datalist id="stockOptions"></datalist>
+
+        <!-- 2. Metrics & Key Figures Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">Invested</span>
+            <span id="metricInvested" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Realized P&L</span>
+            <span id="metricRealizedPL" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Unrealized P&L</span>
+            <span id="metricUnrealizedPL" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Total P&L</span>
+            <span id="metricTotalPL" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">XIRR</span>
+            <span id="metricXirr" class="metric-value">—</span>
+          </div>
+        </div>
+
+        <!-- 3. Indicator Strip & Links Dropdown Bar -->
+        <div class="strip-bar">
+          <!-- Broken-down indicator badges to be updated via JS -->
+          <div id="indicatorStrip" class="indicator-badges">
+            <h4 id = "badge_label"></h4>
+          </div>
+
+          <!-- Links Dropdown Menu -->
+          <div class="dropdown-wrapper">
+            <select
+              id="linksDropdown"
+              class="links-select"
+              onchange="if (this.value) window.open(this.value, '_blank');"
+            >
+              <option value="" disabled selected>🔗 Links</option>
+              <!-- URLs will be populated via JS -->
+            </select>
+          </div>
+        </div>
+
+        <!-- 4. Collapsible View Position History Section -->
+        <div class="collapsible-section">
+          <button id="toggleHistoryBtn" class="collapsible-header">
+            <span class="toggle-icon">📁</span>
+            <span id="historyTitle">View Position History (0 Records)</span>
+          </button>
+          <div
+            id="historyContainer"
+            class="collapsible-content"
+            style="display: none"
+          >
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>S.no</th>
+                    <th>Buy Date</th>
+                    <th>Sell Date</th>
+                    <th>Buy Price</th>
+                    <th>Sell Price</th>
+                    <th>Qty</th>
+                    <th>P&L</th>
+                  </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                  <!-- Rows will be populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Collapsible Research Notes & Links Section -->
+        <div class="collapsible-section">
+          <button id="toggleResearchBtn" class="collapsible-header">
+            <span class="toggle-icon">📁</span>
+            <span>Research Notes & Links</span>
+          </button>
+          <div
+            id="researchContainer"
+            class="collapsible-content"
+            style="display: none"
+          >
+            <!-- Notes Form Block -->
+            <div class="research-group">
+              <label class="section-sub-label">Your Notes</label>
+              <textarea
+                id="notesInput"
+                class="dark-textarea"
+                placeholder="Enter notes here..."
+              ></textarea>
+            </div>
+
+            <div class="research-group">
+              <label class="section-sub-label">Announcements / Catalysts</label>
+              <textarea
+                id="catalystsInput"
+                class="dark-textarea"
+                placeholder="Track orders, capext, etc..."
+              ></textarea>
+            </div>
+
+            <button id="saveUpdatesBtn" class="btn-primary">Save Updates</button>
+
+            <!-- Saved Links Section -->
+            <div class="saved-links-block">
+              <h3 class="saved-links-title">Saved Links</h3>
+              <div id="savedLinksList" class="saved-links-list">
+                <!-- Dynamic list items added via JS -->
+              </div>
+
+              <div class="add-link-form">
+                <span class="section-sub-label">Add New Link</span>
+                <div class="form-row">
+                  <input
+                    type="text"
+                    id="newLinkTitle"
+                    class="dark-input"
+                    placeholder="Link Title"
+                  />
+                  <input
+                    type="text"
+                    id="newLinkUrl"
+                    class="dark-input"
+                    placeholder="URL"
+                  />
+                  <button id="addLinkBtn" class="btn-secondary">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  <script src="deep.js"></script>
+  </body>
+</html>

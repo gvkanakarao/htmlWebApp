@@ -1,0 +1,16 @@
+.app-header {
+  background: #1e1e1e;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+  height: 60px;
+}
+
+.home-btn {
+  font-size: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+}

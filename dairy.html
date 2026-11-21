@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KK/Dairy</title>
+    <link rel="stylesheet" href="dairy.css" />
+    <link rel="stylesheet" href="header.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <a id="home" href="index.html" class="home-btn">🏠</a>
+      <a href="#top" class="home-btn" style="margin-left: auto">🔝</a>
+    </header>
+
+    <main class="scrollable-content">
+      <div class="dairy-container">
+        <!-- Section 1: New Entry -->
+        <div class="section-box">
+          <h3 id="top">New Entry</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Main Category</label>
+              <select id="s1-main"></select>
+            </div>
+            <div class="form-group">
+              <label>Sub Category</label>
+              <select id="s1-sub"></select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 10px">
+            <label>Entry Content</label>
+            <textarea
+              id="s1-text-input"
+              class="dairy-textarea"
+              placeholder="Type your notes here..."
+            ></textarea>
+          </div>
+          <button id="s1-update-btn" class="action-btn">Update Entry</button>
+        </div>
+
+        <!-- Section 2: Category Management -->
+        <div class="section-box">
+          <h3>Category Management</h3>
+          <button id="toggle-cat-btn" class="secondary-btn">
+            Add/Cancel Categories
+          </button>
+          <div id="category-hidden-row" class="hidden-row form-row">
+            <div class="form-group">
+              <label>New Main</label>
+              <input
+                type="text"
+                id="new-main-input"
+                placeholder="Main category name"
+              />
+            </div>
+            <div class="form-group">
+              <label>New Sub</label>
+              <input
+                type="text"
+                id="new-sub-input"
+                placeholder="Sub category name"
+              />
+            </div>
+            <div class="form-group" style="justify-content: flex-end">
+              <button id="add-cat-btn" class="action-btn" style="height: 38px">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Filter Records -->
+        <div class="section-box">
+          <h3>Filter Records</h3>
+          <div class="form-row" style="margin-bottom: 0">
+            <div class="form-group">
+              <label>Filter Main</label>
+              <select id="s3-main"></select>
+            </div>
+            <div class="form-group">
+              <label>Filter Sub</label>
+              <select id="s3-sub"></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Records Workspace & Export -->
+        <div class="section-box">
+          <h3>Records Workspace</h3>
+          <div class="form-group" style="margin-bottom: 10px">
+            <label>Editable Data View</label>
+            <textarea
+              id="workspace-textarea"
+              class="scrollable-textarea"
+              placeholder="Select Main and Sub filters above to view records..."
+            ></textarea>
+          </div>
+          <div style="display: flex; gap: 10px; margin-bottom: 12px">
+            <button id="s4-update-btn" class="action-btn">
+              Update Records
+            </button>
+            <button
+              id="export-csv-btn"
+              class="secondary-btn"
+              style="background: #198754; border-color: #198754"
+            >
+              Download DB as CSV
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="dairy.js"></script>
+  </body>
+</html>
