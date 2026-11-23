@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KK/Holds</title>
+    <link rel="stylesheet" href="hold.css" />
+    <link rel="stylesheet" href="header.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <a id="home" href="index.html" class="home-btn">🏠</a>
+      <a href="#top" class="home-btn" style="margin-left: auto">🔝</a>
+    </header>
+    <main class="scrollable-content">
+      <div class="app-container">
+        <!-- Header & Action Buttons -->
+        <header class="portfolio-header" id="top">
+          <h3 class="page-title">Active Portfolio</h3>
+          <div class="header-actions">
+            <div class="action-group">
+              <button class="btn-outline">
+                <span class="icon-blue">🔄</span> Refresh FF data
+              </button>
+              <span class="timestamp" id="FF_stamp"></span>
+            </div>
+            <div class="action-group">
+              <button class="btn-outline">
+                <span class="icon-blue" id="Mkt_stamp">🔄</span> Refresh Market
+                data
+              </button>
+              <span class="timestamp" id="mkt_stamp"></span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Portfolio Summary Metrics -->
+        <!-- 2. Metrics & Key Figures Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">Invested</span>
+            <span id="hold_invested" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Current Value</span>
+            <span id="hold_currentVal" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Unrealized P&L</span>
+            <span id="hold_PnL" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">P&L%</span>
+            <span id="hold_PnL_percent" class="metric-value">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">XIRR</span>
+            <span id="hold_xirr" class="metric-value">—</span>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Tracker Bar -->
+        <div class="btn-dropdown">
+          <a
+            href="https://www.financiallyfree.in/tools/master-tracker"
+            target="_blank"
+            class="tracker-link"
+            >Master Tracker</a
+          >
+        </div>
+
+        <!-- Collapsible FF Section -->
+        <details class="holdings-expander" open>
+          <summary class="expander-header">
+            <span class="chevron">⌄</span>
+            <span class="folder-icon">📁</span>
+            <h3 id="FF_head"></h3>
+          </summary>
+
+          <!-- Card List Container (Duplicate .stock-card inside here) -->
+          <div class="cards-container" id="cards-list_FF">
+            <!-- SINGLE REUSABLE CARD TEMPLATE -->
+
+            <!-- END CARD TEMPLATE -->
+          </div>
+        </details>
+
+        <!-- Collapsible non-FF Holdings Section -->
+        <details class="holdings-expander" open>
+          <summary class="expander-header">
+            <span class="chevron">⌄</span>
+            <span class="folder-icon">📁</span>
+            <h3 id="nFF_head"></h3>
+          </summary>
+
+          <!-- Card List Container (Duplicate .stock-card inside here) -->
+          <div class="cards-container" id="cards-list_nFF">
+            <!-- SINGLE REUSABLE CARD TEMPLATE -->
+
+            <!-- END CARD TEMPLATE -->
+          </div>
+        </details>
+        <!-- Collapsible MF/ETF Holdings Section -->
+        <details class="holdings-expander" open>
+          <summary class="expander-header">
+            <span class="chevron">⌄</span>
+            <span class="folder-icon">📁</span>
+            <h3 id="MF_head"></h3>
+          </summary>
+
+          <!-- Card List Container (Duplicate .stock-card inside here) -->
+          <div class="cards-container" id="cards-list_MF">
+            <!-- SINGLE REUSABLE CARD TEMPLATE -->
+
+            <!-- END CARD TEMPLATE -->
+          </div>
+        </details>
+      </div>
+    </main>
+    <script src="hold.js"></script>
+  </body>
+</html>

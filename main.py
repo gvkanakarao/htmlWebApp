@@ -66,6 +66,8 @@ with open("deep.py") as f:
 with open("deep_2.py") as f:
     exec(f.read())
 
+with open("hold.py") as f:
+    exec(f.read())
 
 # 12. Endpoint to Fetch All settled trades
 @app.get("/settled_trades")

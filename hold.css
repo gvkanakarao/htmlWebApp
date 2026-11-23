@@ -1,0 +1,387 @@
+:root {
+  --bg-main: #0e1117;
+  --bg-card: #12151c;
+  --bg-box: #161a23;
+  --bg-btn: #1a1e29;
+  --bg-btn-hover: #242938;
+  --border-color: #2b303e;
+  --text-primary: #fafafa;
+  --text-secondary: #a3a8b8;
+  --text-muted: #7c8294;
+  --accent-red: #ff4b4b;
+  --accent-green: #21c354;
+  --accent-blue: #1c83e1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  flex-shrink: 0;
+}
+
+.scrollable-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 36px 48px;
+  scroll-behavior: smooth;
+}
+
+.app-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Header & Refresh Buttons */
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.btn-outline {
+  background-color: var(--bg-btn);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-btn-hover);
+  border-color: #41485c;
+}
+
+.timestamp {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-height: 16px;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  flex: 1;
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.metric-value {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.btn-dropdown {
+  background-color: var(--bg-btn);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tracker-link {
+  color: var(--accent-blue);
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+/* Collapsible Expanders (FF, non-FF, MF/ETF) */
+.holdings-expander {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-main);
+  margin-bottom: 16px;
+}
+
+.expander-header {
+  list-style: none;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.expander-header::-webkit-details-marker {
+  display: none;
+}
+
+.expander-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.expander-header .chevron {
+  transition: transform 0.15s ease;
+}
+
+.holdings-expander:not([open]) .expander-header .chevron {
+  transform: rotate(-90deg);
+}
+
+.cards-container {
+  padding: 8px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Stock Holding Card */
+.stock-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: 1.1fr 1.35fr 1.35fr 1.3fr;
+  gap: 20px;
+  height: 215px; /* Gives Columns 1 & 4 breathing room without clipping */
+  align-items: stretch;
+}
+
+/* Column 1: Stock Info */
+.card-col-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.stock-symbol {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.stat-line {
+  font-size: 13.5px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.stat-sub {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin-top: auto;
+}
+
+.text-danger {
+  color: var(--accent-red);
+  font-weight: 600;
+}
+
+.text-success {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+/* Columns 2 & 3: Comments & Announcements */
+.card-col-notes {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.col-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.note-box {
+  background-color: var(--bg-box);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e6e8ef;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* Prevents scroll jitter when reaching top/bottom of note */
+  white-space: pre-line;
+}
+
+.note-box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.note-box::-webkit-scrollbar-thumb {
+  background-color: #2b303e;
+  border-radius: 999px;
+}
+
+/* Column 4: Market Data & Progress Bar */
+.card-col-market {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.market-top-row,
+.market-mid-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.ltp-text {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.btn-card {
+  background-color: var(--bg-btn);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-card:hover {
+  background-color: var(--bg-btn-hover);
+}
+
+.range-wrapper {
+  margin-top: auto;
+}
+
+.range-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.range-track {
+  width: 100%;
+  height: 5px;
+  background-color: #262b38;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.range-fill {
+  height: 100%;
+  background-color: var(--accent-blue);
+  border-radius: 999px;
+}
+
+/* Responsive Breakpoints (must remain at the bottom of the file) */
+@media (max-width: 1100px) {
+  .stock-card {
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+  }
+
+  .note-box {
+    height: 120px;
+    flex: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .scrollable-content {
+    padding: 16px;
+  }
+
+  .stock-card {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
