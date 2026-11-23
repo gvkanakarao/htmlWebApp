@@ -173,12 +173,12 @@ function addCards(tick_list, cat) {
       inv_FF += row[2] * row[1];
     } else if (cats == "MF_ETF") {
       appendCards(new_card, "cards-list_MF");
-      no_nFF += 1;
-      inv_nFF += row[2] * row[1];
-    } else {
-      appendCards(new_card, "cards-list_nFF");
       no_MF += 1;
       inv_MF += row[2] * row[1];
+    } else {
+      appendCards(new_card, "cards-list_nFF");
+      no_nFF += 1;
+      inv_nFF += row[2] * row[1];
     }
   }
   document.getElementById("FF_head").innerHTML =
