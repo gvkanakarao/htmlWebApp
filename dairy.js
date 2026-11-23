@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = "https://stock-tracker-api-7snp.onrender.com";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Fetch and populate category dropdowns dynamically from Turso
