@@ -183,11 +183,11 @@ function addCards(tick_list) {
   }
   let invested = inv_FF + inv_MF + inv_nFF;
   document.getElementById("FF_head").innerHTML =
-    `Expand for FF, ${no_FF} Invested: Rs ${(inv_FF / 1e5).toFixed(2)} Lakhs --> {(100*inv_FF/invested).toFixed(0)}%`;
+    `Expand for FF, ${no_FF} Invested: Rs ${(inv_FF / 1e5).toFixed(2)} Lakhs --> ${(100*inv_FF/invested).toFixed(0)}%`;
   document.getElementById("nFF_head").innerHTML =
-    `Expand for non-FF, ${no_nFF} Invested: Rs ${(inv_nFF / 1e5).toFixed(2)} Lakhs  --> {(100*inv_nFF/invested).toFixed(0)}%`;
+    `Expand for non-FF, ${no_nFF} Invested: Rs ${(inv_nFF / 1e5).toFixed(2)} Lakhs  --> ${(100*inv_nFF/invested).toFixed(0)}%`;
   document.getElementById("MF_head").innerHTML =
-    `Expand for MF_ETF, ${no_MF} Invested: Rs ${(inv_MF / 1e5).toFixed(2)} Lakhs  --> {(100*inv_MF/invested).toFixed(0)}%`;
+    `Expand for MF_ETF, ${no_MF} Invested: Rs ${(inv_MF / 1e5).toFixed(2)} Lakhs  --> ${(100*inv_MF/invested).toFixed(0)}%`;
 }
 
 function add_top_metrics_labels(metrics, mkt, ff) {
