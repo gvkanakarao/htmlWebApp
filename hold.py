@@ -8,7 +8,7 @@ async def holdings_data():
             FROM current_holdings as h
             LEFT JOIN stock_comments as c ON h.ticker = c.ticker
             LEFT JOIN stock_announcements as a ON h.ticker = a.ticker
-            LEFT JOIN stock_cat as at ON h.ticker = cat.ticker
+            LEFT JOIN stock_cat as cat ON h.ticker = cat.ticker
             ORDER BY h.ticker""")
         hold = [list(row) for row in t_res.rows] if t_res.rows else []
         invested = 0
