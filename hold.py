@@ -4,10 +4,11 @@ async def holdings_data():
     client = get_db_client()
     try:
         t_res = await client.execute("""
-            SELECT h.*, c.comments, a.announcements
+            SELECT h.*, c.comments, a.announcements, cat.category, cat.y_symbol
             FROM current_holdings as h
             LEFT JOIN stock_comments as c ON h.ticker = c.ticker
             LEFT JOIN stock_announcements as a ON h.ticker = a.ticker
+            LEFT JOIN stock_cat as at ON h.ticker = cat.ticker
             ORDER BY h.ticker""")
         cat_res = await client.execute("""
             SELECT key,value FROM app_metadata
