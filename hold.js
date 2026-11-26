@@ -133,10 +133,10 @@ async function holdings_data() {
   try {
     const response = await fetch(`${BACKEND_URL}/all/holdings_data`);
     if (response.ok) {
-      const { hold, top_metrics, cats } = await response.json(); //{"hold":hold, "top_metrics" : [invested,currentVal], "cats":cat}
+      const { hold, top_metrics} = await response.json(); //{"hold":hold, "top_metrics" : [invested,currentVal]}
 
-      addCards(hold, cats[2][1]);
-      add_top_metrics_labels(top_metrics, cats[0], cats[1]);
+      addCards(hold);
+      add_top_metrics_labels(top_metrics, "", ""); //For time being, labels under FF_refresh, Mkt_refresh tabs empty
       // console.log(top_metrics);
       // console.log(cats);
     }
@@ -144,7 +144,7 @@ async function holdings_data() {
     console.error("Failed to load Holdings data:", error);
   }
 }
-function addCards(tick_list, cat) {
+function addCards(tick_list) {
   let no_FF = 0;
   let no_nFF = 0;
   let no_MF = 0;
@@ -153,7 +153,7 @@ function addCards(tick_list, cat) {
   let inv_MF = 0;
 
   for (const row of tick_list) {
-    let cats = get_category(row[0], cat);
+    let cats = row[13];
     let new_card = new HoldingCard({
       symbol: row[0],
       qty: row[1],
@@ -181,13 +181,15 @@ function addCards(tick_list, cat) {
       inv_nFF += row[2] * row[1];
     }
   }
+  let invested = inv_FF + inv_MF + inv_nFF;
   document.getElementById("FF_head").innerHTML =
-    `Expand for FF, ${no_FF} Invested: Rs ${(inv_FF / 1e5).toFixed(2)} Lakhs`;
+    `Expand for FF, ${no_FF} Invested: Rs ${(inv_FF / 1e5).toFixed(2)} Lakhs --> {(100*inv_FF/invested).toFixed(0)}%`;
   document.getElementById("nFF_head").innerHTML =
-    `Expand for non-FF, ${no_nFF} Invested: Rs ${(inv_nFF / 1e5).toFixed(2)} Lakhs`;
+    `Expand for non-FF, ${no_nFF} Invested: Rs ${(inv_nFF / 1e5).toFixed(2)} Lakhs  --> {(100*inv_nFF/invested).toFixed(0)}%`;
   document.getElementById("MF_head").innerHTML =
-    `Expand for MF_ETF, ${no_MF} Invested: Rs ${(inv_MF / 1e5).toFixed(2)} Lakhs`;
+    `Expand for MF_ETF, ${no_MF} Invested: Rs ${(inv_MF / 1e5).toFixed(2)} Lakhs  --> {(100*inv_MF/invested).toFixed(0)}%`;
 }
+
 function add_top_metrics_labels(metrics, mkt, ff) {
   const pnl = (metrics[1] - metrics[0]).toFixed(0);
   const pnl_percent =
@@ -202,10 +204,4 @@ function add_top_metrics_labels(metrics, mkt, ff) {
   document.getElementById("FF_stamp").innerHTML = ff[1];
 }
 
-function get_category(ticker, cat) {
-  let cat_list = JSON.parse(cat);
-  const match =
-    cat_list.find((item) => item.tick_name === ticker)?.category ?? "Not Found";
-  return match;
-}
 holdings_data();
